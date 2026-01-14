@@ -245,10 +245,7 @@ Gardez votre image disque quelque part pour l’évaluation par les pairs.
 # Notions essentielles à connaître avant de commencer le projet
 
 <aside>
-📖
-
-Les sources sont en bas de ce document. La plupart des réponses aux questions proviennent de wikipedia.
-
+📖 Les sources sont en bas de ce document. La plupart des réponses aux questions proviennent de wikipedia.
 </aside>
 
 ## Quelle est le séquence de démarrage d’un micro-ordinateur ?
@@ -256,10 +253,7 @@ Les sources sont en bas de ce document. La plupart des réponses aux questions p
 Voici la séquences des différentes couches qui interviennent lors de la mise sous tension d’un micro-ordinateur sur lequel est installé une distribution Linux :
 
 <aside>
-👉🏽
-
-Matériel → Firmware (BIOS/UEFI) → Bootloader (ex. GRUB ; LILO est aujourd’hui rare) → Noyau Linux (souvent avec un initramfs) → Système d’initialisation (init / systemd) → Espace utilisateur (services, login, shell, etc.)
-
+👉🏽 Matériel → Firmware (BIOS/UEFI) → Bootloader (ex. GRUB ; LILO est aujourd’hui rare) → Noyau Linux (souvent avec un initramfs) → Système d’initialisation (init / systemd) → Espace utilisateur (services, login, shell, etc.)
 </aside>
 
 Petite précision utile : le noyau lance en général un tout premier processus (PID 1) — **systemd** ou un autre *init* — qui se charge ensuite de démarrer le reste du système (services, montages, session…).
@@ -402,10 +396,7 @@ Un fchier “.vdi” et une image disque conçu pour faire tourner des machines 
 # Préparation de l’environnement de développement
 
 <aside>
-⚠️
-
-Attention ! Dans cette section, j’appelle **machine hôte** l’ordinateur *physique* sur lequel est installé VirtualBox. Par la suite la “machine hôte” désignera la machine virtuelle sur laquelle nous allons construire notre distribution.
-
+⚠️ Attention ! Dans cette section, j’appelle **machine hôte** l’ordinateur *physique* sur lequel est installé VirtualBox. Par la suite la “machine hôte” désignera la machine virtuelle sur laquelle nous allons construire notre distribution.
 </aside>
 
 ## Etape 0 : Installer Virtual Box
@@ -422,10 +413,7 @@ Côté ressources, ma VM avait **4 Go de RAM**, **4 vCPU**, et **deux disques vi
 - **Disque 2** : dédié à la future installation **LFS**.
 
 <aside>
-💡
-
-Pour trouver l’image correspondant à votre architecture sur windows, il suffit d’utiliser la commande `set` dans cmd.
-
+💡Pour trouver l’image correspondant à votre architecture sur windows, il suffit d’utiliser la commande `set` dans cmd.
 </aside>
 
 La machine virtuelle que j’ai utilisé comporte 4 Go de RAM, 4 CPU et deux disques durs de 50 Go. Le premier disque dur sera dédié à la machine virtuelle qui permettra la construction de notre Linux From Scratch. Le second disque sera utilisé pour notre LFS lui même.
@@ -550,10 +538,7 @@ Changed type of partition 'Linux filesystem' to 'BIOS boot'.
 ```
 
 <aside>
-📖
-
-Cette partition n a aucun systeme de fichier. Elle conteint core.img qui est lu par le BIOS pour demarer la machine… Elle est necessaire car le disque est en GPT.
-
+📖 Cette partition n a aucun systeme de fichier. Elle conteint core.img qui est lu par le BIOS pour demarer la machine… Elle est necessaire car le disque est en GPT.
 </aside>
 
 - Partition boot
@@ -728,10 +713,7 @@ Oui mais… LFS et le Chroot sont identiques ! Ce sont les deux même systèmes.
 Aucune distinction n’est faite entre LFS et le Chroot.
 
 <aside>
-⁉️
-
-Mais ! A quoi sert la dernière étape puisque nous disposons déjà d’un compilateur capable de tourner sur LFS et de produire des binaires pour LFS ?
-
+⁉️ Mais ! A quoi sert la dernière étape puisque nous disposons déjà d’un compilateur capable de tourner sur LFS et de produire des binaires pour LFS ?
 </aside>
 
 Mais ? A quoi sert la dernière étape ? Effectivement, en observant attentivement le tableau, dés la deuxième étape nous avons un compilateur capable de tourner dans notre distribution et de produire des éxécutables pour notre distribution. A quoi bon continuer ? On pourrait même pousser la question encore plus loin. Pourquoi ne pas tout faire en une seule étape ? La  Debian utiliserai son compilateur pour produire un nouveau compilateur cc-lfs. cc-lfs serait capable de tourner dans LFS et produirait des exécutables pour LFS.
@@ -818,9 +800,7 @@ echo <student_login> > /etc/hostname
 ```
 
 <aside>
-⚠️
-
-Attention cette commande  permet de répondre à l’une des éxigences du sujet : “Le **nom d’hôte** de votre distribution doit également être **votre login étudiant**.” !
+⚠️ Attention cette commande  permet de répondre à l’une des éxigences du sujet : “Le **nom d’hôte** de votre distribution doit également être **votre login étudiant**.” !
 
 </aside>
 
@@ -904,34 +884,17 @@ Pour obtenir l’UUID et le PARTUUID du vdi que vous utilisez, il faut utiliser 
 | Question | Commande(s) | Explication |
 | --- | --- | --- |
 | Le noyau est-il un noyau Linux ? | `uname -s` | Affiche le nom du noyau.  |
-| La version Linux est-elle supérieure à 4.x ? | `uname -r` | Affiche la version du noyau (release). Permet de vérifier qu’elle correspond aux contraintes (`>4`). |
+| La version Linux est-elle supérieure à 4.x ? | `uname -r` | Affiche la version du noyau (release). Doit être `>4`. |
 | Les sources sont-elles dans `/usr/src/linux-x.x` ? | `ls /usr/src` | Liste le contenu de `/usr/src` pour vérifier la présence du répertoire des sources du noyau. |
-| Vérifier la version du kernel dans les logs | `journalctl -k -b | grep -m1 "Linux version"
-dmesg | grep -m1 "Linux version"` | journalctl suffit, la première ligne |
-| Y a-t-il au moins 3 partitions (root, `/boot`, swap) ? | `lsblk
-swapon --show` | `lsblk` affiche disques/partitions et points de montage (utile pour voir `/` et `/boot`). 
-`swapon --show` affiche les espaces swap actifs. |
+| Vérifier la version du kernel dans les logs | `journalctl -k -b \| grep -m1 "Linux version"` ou `dmesg \| grep -m1 "Linux version"` | journalctl suffit, la première ligne montre la version du noyau |
+| Y a-t-il au moins 3 partitions (root, `/boot`, swap) ? | `lsblk swapon --show` | `lsblk` affiche disques/partitions et points de montage (utile pour voir `/` et `/boot`). `swapon --show` affiche les espaces swap actifs. |
 | Y a-t-il un chargeur de modules (type udev) ? | `systemctl status systemd-udevd` | Vérifie que le démon udev (gestion des périphériques) est présent et actif via systemd. |
 | Y a-t-il un bootloader (LILO / GRUB / …) ? | `grub-install --version` | Affiche la version de `grub-install`. Si la commande existe, GRUB est installé. |
 | Vérifier le nom du binaire du kernel dans `/boot` | `ls /boot` | Liste les fichiers de `/boot` pour vérifier la présence et le nom du noyau (`vmlinuz-<version>-<login>`). |
-| Y a-t-il un gestionnaire de démons ?
-(SysV, systemd, …) | `ps -p 1` | Affiche le nom de la commande du PID 1 (init). Dans notre cas : `systemd` . |
+| Y a-t-il un gestionnaire de démons ? (SysV, systemd, …) | `ps -p 1` | Affiche le nom de la commande du PID 1 (init). Dans notre cas : `systemd` . |
 | Un éditeur est-il présent ? | `vim ft_linux_basic.sh` | Ouvre un fichier avec Vim pour vérifier que l’éditeur est installé et fonctionnel. |
-| Internet fonctionne-t-il ? | `ping -c 3 1.1.1.1
-ping -c 3 google.com` | Ping vers une IP (teste réseau sans DNS) puis vers un nom de domaine (teste DNS + réseau). `-c 3` envoie 3 paquets. |
-| Installer le paquet **screen** (source GNU) | `wget https://ftp.gnu.org/gnu/screen/screen-5.0.1.tar.gz
-
-tar -xf screen-5.0.1.tar.gzcd screen-5.0.1
-
-./configure \
---prefix=/usr \ 
---disable-pam \ 
---enable-socket-dir=/run/screen \ 
---with-pty-group=5
-
-make
-
-make install` | Télécharge l’archive, l’extrait, configure la compilation avec options (installation dans `/usr`, PAM désactivé, socket dans `/run/screen`, groupe pty), compile puis installe. |
+| Internet fonctionne-t-il ? | `ping -c 3 1.1.1.1`  `ping -c 3 google.com` | Ping vers une IP (teste réseau sans DNS) puis vers un nom de domaine (teste DNS + réseau). `-c 3` envoie 3 paquets. |
+| Installer le paquet **screen** (source GNU) | `wget https://ftp.gnu.org/gnu/screen/screen-5.0.1.tar.gz tar -xf screen-5.0.1.tar.gzcd screen-5.0.1 ./configure \ --prefix=/usr \ --disable-pam \ --enable-socket-dir=/run/screen \ --with-pty-group=5 make make install` | Télécharge l’archive, l’extrait, configure la compilation avec options (installation dans `/usr`, PAM désactivé, socket dans `/run/screen`, groupe pty), compile puis installe. |
 
 # Sources
 
