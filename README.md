@@ -1,5 +1,7 @@
 # ft_linux
 
+![ChatGPT%20Image%2014%20janv.%202026%2C%2022_37_14.png](ChatGPT%20Image%2014%20janv.%202026%2C%2022_37_14.png)
+
 # Avant propos
 
 Bienvenue dans ce mini-tutoriel, écrit pour vous aider — du moins je l’espère — à aller au bout du projet **ft_linux** de l’école 42. Avant de commencer, voici quelques remarques importantes.
@@ -540,7 +542,7 @@ Changed type of partition 'Linux filesystem' to 'BIOS boot'.
 ```
 
 <aside>
-📖 Cette partition n a aucun systeme de fichier. Elle conteint core.img qui est lu par le BIOS pour demarer la machine… Elle est necessaire car le disque est en GPT.
+📖 Cette partition n a aucun systeme de fichier. Elle contient core.img qui est lu par le BIOS pour demarer la machine… Elle est necessaire car le disque est en GPT.
 </aside>
 
 - Partition boot
